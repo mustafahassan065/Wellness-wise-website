@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: lavender;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-box{
+  height: 400px;
+  width: 50%;
+  border: 1px black solid;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+}
+.btn-box{
+ 
+  flex-direction: column;
+}
+.circle img{
+  border-radius: 100px;
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  
+}
+#btn{
+  background-color: white; 
+  height: 30px;
+  border-style: solid;
+  border-color: #7acfd6;
+  margin-left: 10px;
+  width: 150px;
+ }
+ #btn:hover{
+   background-color: #7acfd6;
+ }
+ #btn1{
+   background-color:#7acfd6 ; 
+   height: 30px;
+   border-style: solid;
+   border-color: #7acfd6; 
+   width: 150px;
+  }
+  .butt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   a{
+    text-decoration: none;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .details{
+   display: flex;
+   align-items: center;
+  }
+ .details ul li{
+  list-style: none;
+ }
+  .icon{
+  display: flex;
+  
+  }
+  .icon img{
+    height: 25px;
+    width: 25px;
+    
+  }
+  .description{
+    margin-left: 10px;
+  }
+  .description li{
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  h1{
+    margin-top: -10px;
+    color: #333;
+  }
+ .btn-box .button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7acfd6;
+  width: 200px;
+  height: 40px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  margin-left: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+ }
+ .btn-box .button:hover{
+  color: white;
+  background-color: rgb(255,166,0);
+ }
+</style>
+<body>
+  <div class="profile-box">
+  {% if profile %}
+  {% if profile.profile_picture %}
+  <div class="circle"><img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="120px" height="120px"></div>
+  {% else %}
+  <p>No profile picture uploaded yet.</p>
+  {% endif %}
+  <h1>{{ profile.first_name }} {{ profile.last_name }} </h1>
+  <div class="buttons">
+  <a href="{% url 'profile_edit' %}"> <div id="btn1" class="butt">Edit Profile </div></a>
+  <a href="#"> <div id="btn" class="butt">Delete Profile</div> </a>
+  </div>
+  <div class="details">
+    <ul>
+ <li> <div class="icon"><img src="{% static 'images/email1-removebg-preview.png' %}"> </div> </li>
+  <li><div class="icon"><img src="{% static 'images/phone-removebg-preview.png' %}"> </div></li>
+  <li><div class="icon"><img src="{% static 'images/goal2-removebg-preview.png' %}"></div>  </li>
+  </ul>
+  <ul class="description">
+    <li>{{ profile.email }}</li>
+    <li>{{ profile.phone_number }}</li>
+    <li>{{ profile.wellness_goals }}</li>
+  </ul>
+  </div>
+  {% else %}
+  <h2>No Profile Found</h2>
+  <a href="{% url 'profile_edit' %}"> <div id="btn1">Create Profile  </div> </a>
+  {% endif %}
+  </div>
+  <div class="btn-box" data-aos = "fade-down">
+  <a href="{% url 'advice_view' %}"><div class="button" > Personalized Advice </div></a>
+  <a href="{% url 'house' %}"><div class="button" > Chat With Experts </div></a>
+  <a href="{% url 'expert_list' %}"><div class="button" > Expert Profiles </div></a>
+  <a href="resources/"><div class="button" > Wellness Resources </div></a>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <!-- our aos data -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        offset: 300,
+        duration: 2000,
+    });
+    </script>
+</body>
+</html>

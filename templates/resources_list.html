@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Resources</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: lavender;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+
+        }
+        h1 {
+            color: rgb(255,166,0);
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: rgb(255,166,0);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 800px;
+        }
+        li {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li a {
+            text-decoration: none;
+            color: rgb(255,166,0);
+            font-weight: bold;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        .resource-info {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .resource-info span {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .favorites-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: rgb(255,166,0);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .favorites-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Wellness Resources</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}">
+    <select name="category">
+        <option value="">All Categories</option>
+        {% for category in categories %}
+        <option value="{{ category.name }}" {% if request.GET.category == category.name %}selected{% endif %}>
+            {{ category.name }}
+        </option>
+        {% endfor %}
+    </select>
+    <select name="topic">
+        <option value="">All Topics</option>
+        {% for topic in topics %}
+        <option value="{{ topic.name }}" {% if request.GET.topic == topic.name %}selected{% endif %}>
+            {{ topic.name }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<ul>
+    {% for resource in resources %}
+    <li>
+        <div class="resource-info">
+            <a href="{{ resource.url }}">{{ resource.title }}</a>
+            <span>{{ resource.category.name }}</span>
+            <span>{{ resource.topic.name }}</span>
+        </div>
+        <a href="{% url 'add_favorite' resource.id %}">Add to Favorites</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="favorites/" class="favorites-link">My Favorites</a>
+
+</body>
+</html>

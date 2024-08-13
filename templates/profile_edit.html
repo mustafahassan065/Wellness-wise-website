@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    form {
+        background-color: #000000;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        width: 330px;
+        color: #7acfd6;
+        height: 410px;
+        background-color: white;
+        border-radius: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="file"] {
+        width: 90%;
+        padding-left: 5px;
+        margin-top: 10px;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+        height: 30px;
+        border-radius: 10px;
+        border-style: groove;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    button {
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        background-color: #7acfd6;
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 140px;
+    }
+    button:hover {
+        background-color: rgb(255,166,0);
+    }
+</style>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <h1>Edit Profile</h1>
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="First Name" value="{{ form.first_name.value|default_if_none:'' }}">
+        <input type="text" name="last_name" placeholder="Last Name" value="{{ form.last_name.value|default_if_none:'' }}">
+        <input type="email" name="email" placeholder="Email Address" value="{{ form.email.value|default_if_none:'' }}">
+        <input type="number" name="phone_number" placeholder="Phone Number" value="{{ form.phone_number.value|default_if_none:'' }}">
+        <input type="file" name="profile_picture" placeholder="Your Picture">
+        <input type="text" name="wellness_goals" placeholder="Wellness Goals" value="{{ form.wellness_goals.value|default_if_none:'' }}">
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
+

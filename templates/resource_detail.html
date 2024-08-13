@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ resource.title }}</h1>
+    <p>Category: {{ resource.category }}</p>
+    <p>Topic: {{ resource.topic }}</p>
+    <p>{{ resource.content }}</p>
+    
+    <button id="favoriteButton" data-resource-id="{{ resource.id }}">
+        {% if is_favorited %}
+            Remove from Favorites
+        {% else %}
+            Add to Favorites
+        {% endif %}
+    </button>
+    
+    <script>
+    // Replace with actual JavaScript logic for AJAX requests
+    document.getElementById('favoriteButton').addEventListener('click', function() {
+        const resourceId = this.dataset.resourceId;
+        const isFavorited = this.textContent.includes('Remove');  // Check button text for favorited state
+    
+        
+    });
+    </script>
+    
+</body>
+</html>

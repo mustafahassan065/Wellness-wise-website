@@ -1,0 +1,402 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styling/home.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.4/swiper-bundle.min.css">
+
+</head>
+<style>
+    body{
+        background-color: white;
+    }
+    header {
+        padding: 2rem;
+        text-align: center;
+        
+      }
+    nav ul li a{
+        text-decoration: none;
+        color: #7acfd6;
+        font-size: 14px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-transform: uppercase;
+        position: relative;
+    }
+    nav ul li a:hover{
+        color: rgb(255,166,0);
+    }
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 75%;
+        float: right;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      }
+    nav ul li .dp{
+        height: 20px;
+        width: 20px;
+        position: relative;  
+    }
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 120px;
+  }
+  
+  .dropdown-menu li {
+    list-style: none;
+    width: 100%;
+  }
+  
+  .dropdown-menu li a {
+    color: #7acfd6;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  
+  .dropdown-menu li a:hover {
+    color: rgb(255,166,0);
+  }
+  
+  /* Profile management dropdown menu styles */
+  .profile-management-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-management-dropdown .dropdown-menu {
+    display: none;
+  }
+  
+  .profile-management-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  .steps{
+    margin-top: 450px;
+  }
+  .container3{
+    margin-top: 30px;
+  }
+  .container4{
+    margin-top: 30px;
+    background-color: lavender;
+  }
+</style>
+<body>
+    <div class="back" style="background-image: url('{% static "images/bp2.jpg" %}');">
+   <header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href= "resources/">Wellness Resources</a></li>
+            <li class="profile-management-dropdown">
+                <a href="#">Profile management</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'profile_edit' %}">Create Profile</a></li>
+                    <li><a href="{% url 'profile_view' %}">My Profile</a></li>
+            
+                </ul>
+            </li>
+            <li class="profile-management-dropdown">
+                <a href="#">Expert connections </a>
+<ul class="dropdown-menu">
+    {% if user.is_authenticated and user.expertprofile %}
+        <li><a href="{% url 'expert_profile_detail' pk=user.expertprofile.id %}"> Profile Detail</a></li>
+    {% else %}
+        <li><a href="{% url 'create_expert_profile' %}">Create Profile</a></li>
+    {% endif %}
+    <li><a href="{% url 'expert_list' %}"> Pro Experts </a></li>
+</ul>
+</li>                                                     
+<li><a href="register/">Register </a></li>
+<li><a  href="login_view/"> Login </a></li>  
+
+
+
+</ul>
+    </nav>
+   </header> 
+    <div class="text" data-aos="fade-down">
+        <h1> WELCOME TO WELLNESS WISE </h1>
+        <p> Empower Your Wellbeing and Expert Guidance for a Healthier You ! </p>
+        <a href="{% url 'advice_view' %}"><div class="butt"> Personalized advice </div></a>
+    </div>
+    <div class="pic">
+    <img src="{% static 'images/yoga-removebg-preview.png' %}">
+    </div>
+   </div>
+   <div class="container10" data-aos="fade-down" >
+   <div class="boxes" >
+    <div class="box" ><h1>Online Sessions</h1> </div>
+    <div class="box"><h1>100+ Experts </h1> </div>
+    <div class="box"><h1>Expert Connections </h1></div>
+    <div class="box"><h1>Personalized Advice </h1></div>
+    <div class="box"><h1>Wellness Goals</h1></div>
+    <div class="box"><h1>Profile Management</h1> </div>
+   </div>
+   </div>
+   <div class="steps"  data-aos="fade-right">
+    <div class="step">
+        <div class="icon"><img src="{% static 'images/icon1.png' %}"></div>
+        <h4>Balance Body & Mind</h4>
+        <p>Lorem ipsum dolor sit amet, et fermentum vestibulum etiam luctus et, mi ornare, aptent neque.</p>
+    </div>
+    <div class="step">
+        <div class="icon"><img src="{% static 'images/icon2.png' %}"></div>
+        <h4>Healthy Dialy Life</h4>
+        <p>Lorem ipsum dolor sit amet, et fermentum vestibulum etiam luctus et, mi ornare, aptent neque.</p>
+    </div>
+    <div class="step">
+        <div class="icon"><img src="{% static 'images/icon3.png' %}"></div>
+        <h4>Nutrition Stratigies</h4>
+        <p>Lorem ipsum dolor sit amet, et fermentum vestibulum etiam luctus et, mi ornare, aptent neque.</p>
+    </div>
+    <div class="step">
+        <div class="icon"><img src="{% static 'images/icon4.png' %}"></div>
+        <h4>Workout Routines</h4>
+        <p>Lorem ipsum dolor sit amet, et fermentum vestibulum etiam luctus et, mi ornare, aptent neque.</p>
+    </div>
+   </div>
+  
+   <div class="container3" data-aos="fade-down" >
+    
+    <div class="slide-container swiper">
+        
+        <h1>OUR SERVICES</h1>
+     <div class="slide-content">
+        <div class="card-wrapper swiper-wrapper">
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide1.jpg' %} " class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content" data-aos="fade-right">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide2.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content" data-aos="fade-right">
+                    <h2 class="name">Physical Activity</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide3.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content" data-aos="fade-right">
+                    <h2 class="name">High Temperature</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide4.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Pysical Treatment</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide5.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide6.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide7.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide8.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide9.jpg' %}" class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    
+                </div>
+            </div>
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{% static 'images/slide3.jpg' %} " class=" card-img">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name">Making Fruit Your Desert</h2>
+                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    
+                </div>
+            </div>
+        </div>
+     </div>
+     <div class="swiper-button-next swiper-navBtn"></div>
+     <div class="swiper-button-prev swiper-navBtn"></div>
+     <div class="swiper-pagination "></div>
+    </div>
+    </div>
+
+    
+<div class="container4" >
+    <div class="list" data-aos="fade-down">
+        <ul>
+           <li><h3>Useful links</h3></li>
+         <li><a href=""> Rent Collection </a></li>
+          <li><a href="">Accounting</a></li>
+  <li><a href="">Agreements</a></li>
+  <li><a href="">  Rental Application</a></li>
+ 
+        </ul>
+     </div>
+     <div class="list" data-aos="fade-down">
+        <ul>
+           <li><h3>Useful links</h3></li>
+         <li><a href=""> Rent Collection </a></li>
+          <li><a href="">Accounting</a></li>
+  <li><a href="">Agreements</a></li>
+  <li><a href="">  Rental Application</a></li>
+ 
+        </ul>
+     </div>
+     <div class="list"  >
+     <div class="address" >
+        <h3 >Address</h3>
+ <p >Narwala chowk FSD <br>
+    near to GCUF</p>
+     </div>
+     <div class="icons" >
+        <a href="" type="button" class="button5">  <img src="{% static 'images/facebook.png' %} "></a> 
+                 <a href="https://www.instagram.com/mustafahassan065?igsh=YWZyMHVoaHg5dXhx" type="button" class="button5"><img src="{% static 'images/instagram_icon.png.webp' %} "></a>
+                <a href="https://www.linkedin.com/in/mustafa-hassan-78b0262b3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" type="button" class="button5">  <img src="{% static 'images/linkedin.png' %}  "></a>
+                    <a href="https://github.com/mustafahassan065" type="button" class="button5"> <img src="{% static 'images/git.png' %}  "></a>
+     </div>
+     </div>
+</div>
+<div class="footer" >
+    <p>Copyright MH store.All Rights Reserved</p>
+    <p>Designed by:Mustafa hassan</p>
+</div>
+
+<!-- Javascript -->
+
+   <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.4/swiper-bundle.min.js"></script>
+<script>
+        var swiper = new Swiper(".slide-content", {
+          slidesPerView: 3,
+          spaceBetween: 25,
+          loop: true,
+          centerSlide :'true',
+          fade: 'true',
+          gragCursor: 'true',
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets:true
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints:{
+            0:{
+                slidesPerView : 1
+            },
+            520:{
+                slidesPerView : 2
+            },
+            950:{
+                slidesPerView : 3
+            },
+          },
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <!-- our aos data -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        offset: 300,
+        duration: 2000,
+    });
+    </script>
+</body>
+</html>
